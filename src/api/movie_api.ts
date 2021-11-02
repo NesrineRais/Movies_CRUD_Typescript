@@ -21,11 +21,12 @@ export const getMovie = (id: number) => {
     })
     .catch((error) => console.log(error));
 };
-export const addMovie = () => {
+export const addMovie = (data: any) => {
+  console.log("response", data);
   return axios
     .post(url)
     .then((response) => {
-      console.log(response);
+      console.log("response", response.data);
       return response.data;
     })
     .catch((error) => console.log(error));

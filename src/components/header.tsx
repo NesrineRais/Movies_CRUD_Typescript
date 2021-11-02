@@ -12,7 +12,8 @@ const Header = () => {
         <Toolbar sx={{ mx: "auto" }}>
           <Typography variant="h6" color="inherit" noWrap>
             <Link to="/">List Movies</Link>
-            <Link to="/Add">Add Movies</Link>
+            <Link to="/add">Add</Link>
+            <Link to="/Edit">Edit</Link>
           </Typography>
         </Toolbar>
       </AppBar>

@@ -11,7 +11,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
-const Movies = () => {
+const MoviesList = () => {
   const [movies, setMovies] = useState<any[]>([]);
   useEffect(() => {
     //methode static
@@ -54,4 +54,4 @@ const Movies = () => {
     </Container>
   );
 };
-export default Movies;
+export default MoviesList;

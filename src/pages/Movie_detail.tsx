@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import { getMovie } from "../api/movie_api";
 type Params = {
   id: string;
@@ -13,7 +13,7 @@ export interface Movie {
   prevState: null;
 }
 
-const Detail = ({ match }: RouteComponentProps<Params>) => {
+const MovieDetails = ({ match }: RouteComponentProps<Params>) => {
   const [movie, setMovie] = useState<Movie | null>(null);
 
   console.log(movie);
@@ -34,4 +34,4 @@ const Detail = ({ match }: RouteComponentProps<Params>) => {
     </>
   );
 };
-export default Detail;
+export default MovieDetails;
