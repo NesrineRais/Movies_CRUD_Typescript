@@ -24,7 +24,7 @@ export const getMovie = (id: number) => {
 export const addMovie = (data: any) => {
   console.log("response", data);
   return axios
-    .post(url)
+    .post(url, data)
     .then((response) => {
       console.log("response", response.data);
       return response.data;
