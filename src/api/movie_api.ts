@@ -31,6 +31,16 @@ export const addMovie = (data: any) => {
     })
     .catch((error) => console.log(error));
 };
+export const updateMovie = (data: any, id: number) => {
+  console.log("response", data, id);
+  return axios
+    .post(url + id, data)
+    .then((response) => {
+      console.log("response", response.data);
+      return response.data;
+    })
+    .catch((error) => console.log(error));
+};
 export const deleteMovie = (id: number) => {
   return axios
     .delete(url + id)

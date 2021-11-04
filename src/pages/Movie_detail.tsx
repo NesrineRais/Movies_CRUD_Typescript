@@ -10,7 +10,6 @@ export interface Movie {
   title: string;
   director: string;
   isFavorite: boolean;
-  prevState: null;
 }
 
 const MovieDetails = ({ match }: RouteComponentProps<Params>) => {

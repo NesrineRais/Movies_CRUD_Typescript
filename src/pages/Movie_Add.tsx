@@ -5,6 +5,10 @@ import { ToggleButton, Button } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { addMovie } from "../api/movie_api";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { Checkbox } from "@mui/material";
+
 type Field = {
   value?: any;
   error?: string;
@@ -21,21 +25,13 @@ type Form = {
 };
 const MovieAdd = () => {
   const [selectedDate, handleDateChange] = useState(new Date());
-  const [selected, setSelected] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [director, setDirector] = useState("");
   const [title, setTitle] = useState("");
-  const [isFavorite, setFavorite] = useState(true);
-  const [releaseDate, setDate] = useState(
-    moment(new Date()).format("DD/MM/YYYY")
-  );
+  const [isFavorite, setFavorite] = useState(false);
+  const [releaseDate, setDate] = useState(String);
 
-  const [form, setForm] = useState<Form>({
-    director: director,
-    title: title,
-    isFavorite: isFavorite,
-    releaseDate: moment(releaseDate).format("DD/MM/YYYY"),
-  });
-  console.log(form);
+  const history = useHistory();
   useEffect(() => {
     //console.log(match.params.id);
   }, []);
@@ -44,71 +40,88 @@ const MovieAdd = () => {
   ) => {
     e.preventDefault();
     //title: setTitle(e.target.value),
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
-    const newField = {
-      director: e.target.value,
-      title: e.target.value,
-      releaseDate: moment(e.target.value).format("DD/MM/YYYY"),
-    };
-    setForm({ ...form, ...newField });
+
     //console.log(form);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    const form = {
+      director: director,
+      title: title,
+      isFavorite: isFavorite,
+      releaseDate: moment(new Date()).format("DD/MM/YYYY"),
+    };
 
     addMovie(form).then((res) => {
       console.log("movie", res);
+      history.push(`/`);
     });
   };
 
   return (
     <div>
-      <h1>Page Add</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-          <TextField
-            label="director"
-            id="name"
-            name="director"
-            defaultValue="director"
-            onChange={(e) => handleChange(e)}
-          />
-          <TextField
-            label="title"
-            name="title"
-            id="outlined-size-normal"
-            defaultValue="title"
-            onChange={(e) => handleChange(e)}
-          />
-          <TextField
-            type="date"
-            name="releaseDate"
-            id="outlined-size-normal"
-            onChange={(e) => handleChange(e)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <ToggleButton
-            value="check"
-            name="isFavorite"
-            selected={selected}
-            onChange={() => {
-              setSelected(!selected);
-            }}
-          >
-            {selected ? <Favorite /> : <FavoriteBorder />}
-          </ToggleButton>
-        </div>
-        <div>
-          <Button variant="contained" type="submit">
-            Ok
-          </Button>
-        </div>
-      </form>
+      <Box
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+      >
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div>
+            <TextField
+              rows={4}
+              required
+              label="director"
+              id="name"
+              name="director"
+              defaultValue="director"
+              value={director}
+              onChange={(e) => setDirector(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              label="title"
+              name="title"
+              id="outlined-size-normal"
+              defaultValue="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              type="date"
+              name="releaseDate"
+              id="outlined-size-normal"
+              onChange={(e) => setDate(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isFavorite}
+                  onChange={(e) => {
+                    console.log(e.target.checked, "0");
+                    // handleChange(e);
+                    setFavorite(e.target.checked);
+                  }}
+                />
+              }
+              label="Favoris"
+            />
+          </div>
+          <div>
+            <Button variant="contained" type="submit">
+              Ok
+            </Button>
+          </div>
+        </form>
+      </Box>
     </div>
   );
 };
