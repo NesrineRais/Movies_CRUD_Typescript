@@ -12,17 +12,17 @@ export const getMovies = () => {
     })
     .catch((error) => console.log(error));
 };
+
 export const getMovie = (id: number) => {
   return axios
     .get(url + id)
     .then((response) => {
-      console.log(response);
       return response.data;
     })
     .catch((error) => console.log(error));
 };
+
 export const addMovie = (data: any) => {
-  console.log("response", data);
   return axios
     .post(url, data)
     .then((response) => {
@@ -31,10 +31,11 @@ export const addMovie = (data: any) => {
     })
     .catch((error) => console.log(error));
 };
-export const updateMovie = (data: any, id: number) => {
+
+export const updateMovie = (id: number, data: any) => {
   console.log("response", data, id);
   return axios
-    .post(url + id, data)
+    .put(url + id, data)
     .then((response) => {
       console.log("response", response.data);
       return response.data;

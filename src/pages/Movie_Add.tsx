@@ -32,16 +32,11 @@ const MovieAdd = () => {
   const [releaseDate, setDate] = useState(String);
 
   const history = useHistory();
-  useEffect(() => {
-    //console.log(match.params.id);
-  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<{ value: string; name: string }>
   ) => {
     e.preventDefault();
-    //title: setTitle(e.target.value),
-
-    //console.log(form);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +45,7 @@ const MovieAdd = () => {
       director: director,
       title: title,
       isFavorite: isFavorite,
-      releaseDate: moment(new Date()).format("DD/MM/YYYY"),
+      releaseDate: moment(releaseDate).format("DD/MM/YYYY"),
     };
 
     addMovie(form).then((res) => {
@@ -74,8 +69,7 @@ const MovieAdd = () => {
               label="director"
               id="name"
               name="director"
-              defaultValue="director"
-              value={director}
+              defaultValue={director}
               onChange={(e) => setDirector(e.target.value)}
             />
           </div>
@@ -84,8 +78,7 @@ const MovieAdd = () => {
               label="title"
               name="title"
               id="outlined-size-normal"
-              defaultValue="title"
-              value={title}
+              defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
