@@ -27,7 +27,6 @@ const MoviesList = () => {
     getMovies().then((movies) => setMovies(movies));
   }, []);
   const heandledetail = (id: string) => {
-    console.log(id);
     history.push(`/${id}`);
   };
   const handleSupprime = (id: number) => {

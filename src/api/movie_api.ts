@@ -7,7 +7,6 @@ export const getMovies = () => {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response.data;
     })
     .catch((error) => console.log(error));

@@ -33,11 +33,16 @@ const MovieEdit = () => {
   const [director, setDirector] = useState("");
   const [title, setTitle] = useState("");
   const [isFavorite, setFavorite] = useState(false);
-  const [releaseDate, setDate] = useState(String);
+  const [releaseDate, setDate] = useState("");
   const history = useHistory();
-
   useEffect(() => {
-    getMovie(+id).then((res) => setMovie(res));
+    getMovie(+id).then((res) => {
+      setMovie(res);
+      setTitle(res.title);
+      setDirector(res.director);
+      setFavorite(res.isFavorite);
+      setDate(res.releaseDate);
+    });
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
