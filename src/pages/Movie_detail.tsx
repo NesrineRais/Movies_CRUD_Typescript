@@ -1,6 +1,9 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { getMovie } from "../api/movie_api";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+
 type Params = {
   id: string;
 };
@@ -23,14 +26,18 @@ const MovieDetails = ({ match }: RouteComponentProps<Params>) => {
   }, []);
   console.log(movie);
   return (
-    <>
-      <h1>Films</h1>
-      <span>{movie?.title}</span>
-      <br></br>
-      <span>{movie?.director}</span>
-      <br></br>
-      <span>{movie?.isFavorite}</span>
-    </>
+    <React.Fragment>
+      <CardContent>
+        <h1>Détail de Film</h1>
+
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <h2>Titre Film : {movie?.title} </h2>
+        </Typography>
+        <Typography variant="h5" component="div">
+          Directeur de Film : {movie?.director}
+        </Typography>
+      </CardContent>
+    </React.Fragment>
   );
 };
 export default MovieDetails;

@@ -56,6 +56,8 @@ const MovieAdd = () => {
 
   return (
     <div>
+      <h1 className="center">Add</h1>
+
       <Box
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch" },
